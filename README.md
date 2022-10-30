@@ -1,4 +1,6 @@
-Keeping track of info required for project write up here: 
+Keeping track of info required for project write up here:
+https://www.cs.utexas.edu/users/witchel/371M/hw/writeup.html
+
 
 Make sure your report specifies the following items, but bear in mind that the report is just your chance to convince me that you did a good job. 
 Include what you think is necessary to convince me of that fact. 

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:clickable="true"
+    android:focusable="true">
+
+    <TextView
+        android:id="@+id/restaurantName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Five Guys"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/restaurantRating"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--  Todo make this a cool star graphic or something? -->
+    <TextView
+        android:id="@+id/restaurantRating"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="5/5"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/restaurantDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fast casual restaurant that sells hamburgers/hotdogs."
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/restaurantName" />
+
+    <!-- TODO: Maybe add in business hours or some other details -->
+
+    <TextView
+        android:id="@+id/restaurantAddress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="1234 Main St"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/restaurantPhoneNumber"
+        app:layout_constraintTop_toBottomOf="@+id/restaurantDescription" />
+
+    <TextView
+        android:id="@+id/restaurantPhoneNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="000-867-5309"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/restaurantDescription" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
