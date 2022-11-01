@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.finalproject.api.RestaurantDetails
+import com.example.finalproject.api.RestaurantData
 import com.example.finalproject.databinding.RestaurantDetailsBinding
 
 class RestaurantDetailsAdapter :
-    ListAdapter<RestaurantDetails, RestaurantDetailsAdapter.VH>(DiffCallback()) {
+    ListAdapter<RestaurantData, RestaurantDetailsAdapter.VH>(DiffCallback()) {
 
     inner class VH(val restaurantDetailsBinding: RestaurantDetailsBinding) :
         RecyclerView.ViewHolder(restaurantDetailsBinding.root)
@@ -31,17 +31,17 @@ class RestaurantDetailsAdapter :
 
 
     // https://medium.com/android-news/recylerview-list-adapter-template-in-kotlin-6b9814201458
-    class DiffCallback : DiffUtil.ItemCallback<RestaurantDetails>() {
+    class DiffCallback : DiffUtil.ItemCallback<RestaurantData>() {
         override fun areItemsTheSame(
-            oldItem: RestaurantDetails,
-            newItem: RestaurantDetails
+            oldItem: RestaurantData,
+            newItem: RestaurantData
         ): Boolean {
             return oldItem.restaurantName == newItem.restaurantName
         }
 
         override fun areContentsTheSame(
-            oldItem: RestaurantDetails,
-            newItem: RestaurantDetails
+            oldItem: RestaurantData,
+            newItem: RestaurantData
         ): Boolean {
             return oldItem == newItem
         }
