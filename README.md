@@ -18,7 +18,7 @@ I love hearing about debugging war stories. I'm serious, it is a problem for me.
 Report the title of your app
 
 ## Description
-a one or two line description
+Our app is designed to help individuals or groups decide on a location to eat based on their dining preferences. The goal is to please the most members of the group while avoiding the “I don’t care you pick” circular conversation. We will utilize the output of a recommendation algorithm as input to the Google Maps API to display details of the best nearby restaurants. 
  
 ## Screenshot
 Include a screenshot of your app, hopefully one that illustrates key functionality.
