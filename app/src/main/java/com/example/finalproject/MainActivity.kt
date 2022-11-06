@@ -7,17 +7,21 @@ import androidx.fragment.app.commit
 import com.example.finalproject.databinding.ActivityMainBinding
 import com.example.finalproject.ui.HomeFragment
 import com.example.finalproject.ui.RestaurantDetails
+import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 
 
 class MainActivity : AppCompatActivity() {
-    companion object {
-        private const val homeFragTag = "homeFragTag"
-    }
+
+    private val signInLauncher =
+        registerForActivityResult(FirebaseAuthUIActivityResultContract()) {
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(activityMainBinding.root)
+
+        AuthInit(signInLauncher)
 
         addHomeFragment()
 
@@ -28,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun addHomeFragment() {
         supportFragmentManager.commit {
-            add(R.id.main_frame, HomeFragment.newInstance(), homeFragTag)
+            add(R.id.main_frame, HomeFragment.newInstance(), HomeFragment.tag)
         }
     }
 

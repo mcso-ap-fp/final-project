@@ -12,6 +12,7 @@ class HomeFragment: Fragment() {
     private val binding get() = _binding!!
 
     companion object {
+        const val tag = "homeFragTag"
         fun newInstance(): HomeFragment {
             return HomeFragment()
         }
