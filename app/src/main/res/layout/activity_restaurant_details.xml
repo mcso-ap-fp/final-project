@@ -7,17 +7,18 @@
     tools:showIn="@layout/activity_restaurant_details">
 
     <!--    Todo: Use Recycler View for Restaurant Details -->
-    <include
-        android:id="@+id/restaurantDetails1"
-        layout="@layout/restaurant_details"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
-
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/recyclerView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
+<!--    <include-->
+<!--        android:id="@+id/restaurantDetails1"-->
+<!--        layout="@layout/restaurant_details"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
 <!--        />-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

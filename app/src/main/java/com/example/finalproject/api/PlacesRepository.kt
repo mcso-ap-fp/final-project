@@ -12,4 +12,9 @@ class PlacesRepository (private val api: PlacesApi) {
         return outputRestaurants
     }
 
+    suspend fun getDirections(origin: String, destination: String, apikey: String) : List<Route> {
+        var response = api.getDirections(origin, destination, apikey)
+        return response.routes
+    }
+
 }

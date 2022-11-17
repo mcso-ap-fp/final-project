@@ -1,6 +1,7 @@
 package com.example.finalproject.api
 
 import android.text.SpannableString
+import com.example.finalproject.ui.Directions
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
@@ -17,14 +18,21 @@ import java.lang.reflect.Type
 
 interface PlacesApi {
 
-    @GET("place/textsearch/json?")
-    suspend fun getRestaurant(city : String, @Query("key=")apiKey: String) : PlacesReponse
+    @GET("/maps/api/place/textsearch/json?")
+    suspend fun getRestaurant(@Query("query")city : String, @Query("key")apikey: String) : PlacesReponse
 
     class PlacesReponse(
         val html_atrributions : List<String?>,
         val next_page_token : String?,
         val results : List<RestaurantData>,
         val status : String
+    )
+
+    @GET("/maps/api/directions/json?")
+    suspend fun getDirections(@Query("origin") origin: String, @Query("destination") destination: String, @Query("key")apikey: String) : DirectionsResponse
+
+    class DirectionsResponse(
+        val routes: List<Route>
     )
 
     class SpannableDeserializer : JsonDeserializer<SpannableString> {
@@ -50,7 +58,7 @@ interface PlacesApi {
         //private const val BASE_URL = "https://www.reddit.com/"
         var httpurl = HttpUrl.Builder()
             .scheme("https")
-            .host("maps.googleapis.com/maps/api/")
+            .host("maps.googleapis.com")
             .build()
         fun create(): PlacesApi = create(httpurl)
         private fun create(httpUrl: HttpUrl): PlacesApi {

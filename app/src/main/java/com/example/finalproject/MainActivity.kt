@@ -7,11 +7,20 @@ import androidx.activity.viewModels
 import com.example.finalproject.databinding.ActivityMainBinding
 import com.example.finalproject.ui.MainViewModel
 import com.example.finalproject.ui.RestaurantDetails
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.net.*
 
 
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        const val directionsKey = "directionsKey"
+    }
+
+    private lateinit var placesClient: PlacesClient
     private val viewModel: MainViewModel by viewModels()
+    private val apiKey = "AIzaSyDpDP44Eof2LUs__NZ32Xm_uhwrsFICGZM"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,8 +30,16 @@ class MainActivity : AppCompatActivity() {
         activityMainBinding.contentMain.viewResults.setOnClickListener {
             launchRestaurantDetailActivity()
         }
+        //Places.initialize(applicationContext, apiKey)
+        //placesClient = Places.createClient(this)
 
-        var test = viewModel.netRestaurants()
+        //var request = {
+
+        //    types :
+        //}
+        viewModel.netRestaurants()
+
+
     }
 
 
