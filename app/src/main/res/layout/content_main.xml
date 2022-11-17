@@ -19,11 +19,20 @@
        />
 
    <Button
-       android:id="@+id/viewResults"
+       android:id="@+id/updatePreferences"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintTop_toBottomOf="@+id/main_frame"
+       android:text="Preferences">
+   </Button>
+
+   <Button
+       android:id="@+id/viewResults"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/updatePreferences"
        android:text="View Results">
    </Button>
 

@@ -7,7 +7,9 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.commit
 import com.example.finalproject.databinding.ActivityMainBinding
+import com.example.finalproject.databinding.ContentMainBinding
 import com.example.finalproject.ui.HomeFragment
+import com.example.finalproject.ui.PreferencesFragment
 import com.example.finalproject.ui.RestaurantDetails
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
@@ -15,6 +17,8 @@ import com.google.firebase.auth.FirebaseAuth
 
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding : ContentMainBinding
 
     private val signInLauncher =
         registerForActivityResult(FirebaseAuthUIActivityResultContract()) {
@@ -24,10 +28,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(activityMainBinding.root)
+        binding = activityMainBinding.contentMain
 
         AuthInit(signInLauncher)
 
         addHomeFragment()
+        preferencesFragment()
 
         activityMainBinding.contentMain.viewResults.setOnClickListener {
             launchRestaurantDetailActivity()
@@ -53,6 +59,14 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.commit {
             add(R.id.main_frame, HomeFragment.newInstance(), HomeFragment.tag)
         }
+    }
+
+    private fun preferencesFragment() {
+       binding.updatePreferences.setOnClickListener {
+           supportFragmentManager.commit {
+               replace(R.id.main_frame, PreferencesFragment.newInstance(), PreferencesFragment.tag)
+           }
+       }
     }
 
     private fun logout() {
