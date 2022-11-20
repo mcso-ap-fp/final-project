@@ -13,5 +13,7 @@ data class RestaurantData (
     @SerializedName("rating")
     val rating : String,
     @SerializedName("user_rating_totals")
-    val totalReviews : String
+    val totalReviews : String,
+    @SerializedName("place_id")
+    val placeID : String
     )

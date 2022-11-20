@@ -3,10 +3,7 @@ package com.example.finalproject.ui
 import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.*
-import com.example.finalproject.api.PlacesApi
-import com.example.finalproject.api.PlacesRepository
-import com.example.finalproject.api.RestaurantData
-import com.example.finalproject.api.Route
+import com.example.finalproject.api.*
 import com.google.android.datatransport.runtime.Destination
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.awaitAll
@@ -18,12 +15,12 @@ class MainViewModel : ViewModel() {
     private val placesRepository = PlacesRepository(placesApi)
     private val currentRestaurants = MutableLiveData<List<RestaurantData>>()
     private val currentDirections = MutableLiveData<List<Route>>()
+    private val currentSingleRestaurant = MutableLiveData<RestaurantDetailsData>()
 
 
     private val city = "restaurants austin"
     private val apiKey = "AIzaSyDpDP44Eof2LUs__NZ32Xm_uhwrsFICGZM"
     private val origin = "5350 Burnet Rd, Austin, TX 78756"
-    private val destination = "5301 Aurora Dr, Austin, TX 78756"
 
 
     fun netRestaurants(){
@@ -36,13 +33,23 @@ class MainViewModel : ViewModel() {
         return currentRestaurants
     }
 
-    fun netDirections(){
+    fun netDirections(restaurant_address:String){
         viewModelScope.launch(context = viewModelScope.coroutineContext + Dispatchers.IO){
-            currentDirections.postValue(placesRepository.getDirections(origin, destination, apiKey))
+            currentDirections.postValue(placesRepository.getDirections(origin, restaurant_address, apiKey))
         }
     }
 
     fun getDirections(): LiveData<List<Route>> {
         return currentDirections
+    }
+
+    fun netSingleRestaurant(place_id: String){
+        viewModelScope.launch(context = viewModelScope.coroutineContext + Dispatchers.IO){
+            currentSingleRestaurant.postValue(placesRepository.getRestaurantDetails(place_id, apiKey))
+        }
+    }
+
+    fun observeSingleRestaurant(): LiveData<RestaurantDetailsData>{
+        return currentSingleRestaurant
     }
 }

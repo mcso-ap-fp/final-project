@@ -16,6 +16,8 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         const val directionsKey = "directionsKey"
+        const val placeIdKey = "placeIdKey"
+        const val restaurantNameKey = "restaurantNameKey"
     }
 
     private lateinit var placesClient: PlacesClient

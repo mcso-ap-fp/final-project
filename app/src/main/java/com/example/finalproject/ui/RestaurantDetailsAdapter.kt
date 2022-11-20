@@ -35,7 +35,7 @@ class RestaurantDetailsAdapter :
         binding.restaurantName.text = item.restaurantName
         binding.restaurantAddress.text = item.address
         binding.restaurantRating.text = item.rating
-        
+
 
         binding.directions.setOnClickListener {
             val directions_intent = Intent(it.context, Directions::class.java)
@@ -43,6 +43,12 @@ class RestaurantDetailsAdapter :
             it.context.startActivity(directions_intent)
         }
 
+        binding.menu.setOnClickListener {
+            val details_intent = Intent(it.context, SingleRestaurantDetails::class.java)
+            details_intent.putExtra(MainActivity.placeIdKey, item.placeID)
+            details_intent.putExtra(MainActivity.restaurantNameKey, binding.restaurantName.text)
+            it.context.startActivity(details_intent)
+        }
 
     }
 

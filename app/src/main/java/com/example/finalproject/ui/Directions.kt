@@ -63,18 +63,13 @@ class Directions : AppCompatActivity(), OnMapReadyCallback {
         setContentView(R.layout.direcions_map)
 
         address = intent.getStringExtra(MainActivity.directionsKey)
-        viewModel.netDirections()
+        viewModel.netDirections(address!!)
         viewModel.getDirections().observe(this) {
             for (x in it.first().legs.first().steps){
                 polylines.add(x.polyline.points)
                 //map.addPolyline(PolylineOptions().addAll(PolyUtil.decode(x.polyline.points)).color(Color.RED))
             }
         }
-
-
-
-
-
 
         //Thread.sleep(5_000)
 
@@ -136,7 +131,7 @@ class Directions : AppCompatActivity(), OnMapReadyCallback {
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(nearMopacAndWAnderson, 15.0f))
         }
 
-        viewModel.netDirections()
+        viewModel.netDirections(address!!)
         viewModel.getDirections().observe(this) {
             for (x in it.first().legs.first().steps){
                 //polylines.add(x.polyline.points)

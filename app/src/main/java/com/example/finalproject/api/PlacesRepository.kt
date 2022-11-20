@@ -17,4 +17,9 @@ class PlacesRepository (private val api: PlacesApi) {
         return response.routes
     }
 
+    suspend fun getRestaurantDetails(place_id: String, apikey: String) : RestaurantDetailsData {
+        var details = api.getRestaurantDetails(place_id, apikey)
+        return details.result
+    }
+
 }

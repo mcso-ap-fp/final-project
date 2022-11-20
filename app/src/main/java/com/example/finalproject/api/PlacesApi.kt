@@ -31,8 +31,16 @@ interface PlacesApi {
     @GET("/maps/api/directions/json?")
     suspend fun getDirections(@Query("origin") origin: String, @Query("destination") destination: String, @Query("key")apikey: String) : DirectionsResponse
 
+    @GET("/maps/api/place/details/json?")
+    suspend fun getRestaurantDetails(@Query("place_id") id: String, @Query("key") apikey: String) : DetailsResponse
+
     class DirectionsResponse(
         val routes: List<Route>
+    )
+
+    class DetailsResponse(
+        val html_atrributions: List<String?>,
+        val result: RestaurantDetailsData
     )
 
     class SpannableDeserializer : JsonDeserializer<SpannableString> {
