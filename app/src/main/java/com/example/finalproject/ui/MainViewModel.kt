@@ -19,8 +19,8 @@ class MainViewModel : ViewModel() {
 
 
     private val city = "restaurants austin"
-    private val apiKey = "AIzaSyDpDP44Eof2LUs__NZ32Xm_uhwrsFICGZM"
-    private val origin = "5350 Burnet Rd, Austin, TX 78756"
+    private val apiKey = ""
+    private val origin = ""
 
 
     fun netRestaurants(){
