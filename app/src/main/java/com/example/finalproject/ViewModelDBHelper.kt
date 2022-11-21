@@ -9,13 +9,14 @@ class ViewModelDBHelper() {
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     private val userPreferenceCollection = "user_preferences"
 
-    private fun dbFetchUserPreferences(userPreferencesList: MutableLiveData<List<UserPreferences>>) {
+    fun dbFetchUserPreferences(userPreferencesList: MutableLiveData<List<UserPreferences>>) {
         db.collection(userPreferenceCollection)
             .orderBy("timeStamp")//, Query.Direction.DESCENDING)
-            .limit(10)
             .get()
             .addOnSuccessListener { result ->
-               // TODO: Post to view model
+                userPreferencesList.postValue(result.documents.mapNotNull {
+                    it.toObject(UserPreferences::class.java)
+                })
             }
             .addOnFailureListener {
             }

@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.finalproject.PreferencesViewModel
 import com.example.finalproject.RVDiffAdapter
 import com.example.finalproject.databinding.FragmentPreferencesBinding
 import com.example.finalproject.model.CuisineRepository
@@ -15,6 +17,7 @@ class PreferencesFragment: Fragment() {
     private val cuisineRepository = CuisineRepository()
     private var _binding: FragmentPreferencesBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: PreferencesViewModel by activityViewModels()
 
     companion object {
         const val tag = "preferencesFragTag"
@@ -31,6 +34,12 @@ class PreferencesFragment: Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
     }
 
+//    private fun observePreferences() {
+//        viewModel.observePreferences().observe(viewLifecycleOwner) {
+////            adapter.submitList()
+//        }
+//    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,6 +51,8 @@ class PreferencesFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initAdapter()
+        viewModel.fetchInitialPreferences()
+
         super.onViewCreated(view, savedInstanceState)
     }
 }
