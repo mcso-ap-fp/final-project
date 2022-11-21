@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <string name="google_places_key" templateMergeStrategy="preserve" translatable="false">
+        <!-- Please get your own API key from Google and copy it here. -->
+            <!-- See above directions and course videos -->
+            AIzaSyDpDP44Eof2LUs__NZ32Xm_uhwrsFICGZM
+    </string>
+</resources>

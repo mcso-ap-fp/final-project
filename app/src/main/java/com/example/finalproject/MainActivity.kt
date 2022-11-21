@@ -6,14 +6,19 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.commit
+import androidx.activity.viewModels
 import com.example.finalproject.databinding.ActivityMainBinding
 import com.example.finalproject.databinding.ContentMainBinding
 import com.example.finalproject.ui.HomeFragment
 import com.example.finalproject.ui.PreferencesFragment
+import com.example.finalproject.ui.MainViewModel
 import com.example.finalproject.ui.RestaurantDetails
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.google.firebase.auth.FirebaseAuth
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.net.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,6 +28,17 @@ class MainActivity : AppCompatActivity() {
     private val signInLauncher =
         registerForActivityResult(FirebaseAuthUIActivityResultContract()) {
         }
+
+
+    companion object {
+        const val directionsKey = "directionsKey"
+        const val placeIdKey = "placeIdKey"
+        const val restaurantNameKey = "restaurantNameKey"
+    }
+
+    private lateinit var placesClient: PlacesClient
+    private val viewModel: MainViewModel by viewModels()
+    private val apiKey = "AIzaSyDpDP44Eof2LUs__NZ32Xm_uhwrsFICGZM"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +54,16 @@ class MainActivity : AppCompatActivity() {
         activityMainBinding.contentMain.viewResults.setOnClickListener {
             launchRestaurantDetailActivity()
         }
+        //Places.initialize(applicationContext, apiKey)
+        //placesClient = Places.createClient(this)
+
+        //var request = {
+
+        //    types :
+        //}
+        viewModel.netRestaurants()
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -88,6 +114,7 @@ class MainActivity : AppCompatActivity() {
     private fun launchRestaurantDetailActivity () {
         val restaurantDetailIntent = Intent(this, RestaurantDetails::class.java)
         startActivity(restaurantDetailIntent)
+
     }
 
 }
