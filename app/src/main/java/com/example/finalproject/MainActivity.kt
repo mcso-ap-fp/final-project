@@ -114,7 +114,6 @@ class MainActivity : AppCompatActivity() {
     private fun launchRestaurantDetailActivity () {
         val restaurantDetailIntent = Intent(this, RestaurantDetails::class.java)
         startActivity(restaurantDetailIntent)
-
     }
 
 }
