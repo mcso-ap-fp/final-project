@@ -19,35 +19,35 @@
         android:id="@+id/prompt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/will_you_be_dining_solo_or_with_a_group"
+        android:text="Let's help you decide where to eat!"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcomeMessage"
-        app:layout_constraintBottom_toTopOf="@+id/soloButton"
+        app:layout_constraintBottom_toTopOf="@+id/findRestaurant"
         />
 
     <Button
-        android:id="@+id/soloButton"
+        android:id="@+id/findRestaurant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
         android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/groupButton"
         app:layout_constraintTop_toBottomOf="@+id/prompt"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        android:text="Solo">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Find a Restaurant">
     </Button>
 
-    <Button
-        android:id="@+id/groupButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        app:layout_constraintStart_toEndOf="@+id/soloButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prompt"
-        android:text="Group">
-    </Button>
+<!--    <Button-->
+<!--        android:id="@+id/groupButton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/soloButton"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/prompt"-->
+<!--        android:text="Group">-->
+<!--    </Button>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

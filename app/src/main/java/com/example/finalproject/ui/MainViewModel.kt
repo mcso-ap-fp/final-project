@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.lifecycle.*
 import com.example.finalproject.api.*
 import com.google.android.datatransport.runtime.Destination
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
@@ -17,6 +18,7 @@ class MainViewModel : ViewModel() {
     private val currentDirections = MutableLiveData<List<Route>>()
     private val currentSingleRestaurant = MutableLiveData<RestaurantDetailsData>()
 
+    private val userDisplayName = MutableLiveData<String>()
 
     private val city = "restaurants austin"
     private val apiKey = ""
@@ -51,5 +53,14 @@ class MainViewModel : ViewModel() {
 
     fun observeSingleRestaurant(): LiveData<RestaurantDetailsData>{
         return currentSingleRestaurant
+    }
+
+    fun setUserDisplayName() {
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        userDisplayName.postValue(currentUser?.displayName)
+    }
+
+    fun observeUserDisplayName(): LiveData<String> {
+        return userDisplayName
     }
 }

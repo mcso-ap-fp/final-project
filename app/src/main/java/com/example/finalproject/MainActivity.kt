@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     private val signInLauncher =
         registerForActivityResult(FirebaseAuthUIActivityResultContract()) {
+            viewModel.setUserDisplayName()
         }
 
 
@@ -47,9 +48,9 @@ class MainActivity : AppCompatActivity() {
         binding = activityMainBinding.contentMain
 
         AuthInit(signInLauncher)
+        viewModel.setUserDisplayName()
 
         addHomeFragment()
-        preferencesFragment()
 
         activityMainBinding.contentMain.viewResults.setOnClickListener {
             launchRestaurantDetailActivity()
@@ -87,12 +88,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun preferencesFragment() {
-       binding.updatePreferences.setOnClickListener {
-           supportFragmentManager.commit {
-               replace(R.id.main_frame, PreferencesFragment.newInstance(), PreferencesFragment.tag)
-           }
-       }
+     fun loadPreferencesFragment() {
+            supportFragmentManager.commit {
+                replace(R.id.main_frame, PreferencesFragment.newInstance(), PreferencesFragment.tag).addToBackStack(PreferencesFragment.tag)
+            }
     }
 
     private fun logout() {
