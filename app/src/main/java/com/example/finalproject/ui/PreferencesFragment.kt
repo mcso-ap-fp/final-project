@@ -62,7 +62,7 @@ class PreferencesFragment: Fragment() {
     private fun submitPreferences() {
         val maxDistance = milesToMeters(binding.distanceSlider.value.toDouble()).toString()
         val cuisine = ""
-        val maxPrice = binding.priceSlider.value.toString()
+        val maxPrice = binding.priceSlider.value.toInt().toString()
 
         // Launch Restaurant Activity
         val mainActivity: MainActivity = activity as MainActivity
