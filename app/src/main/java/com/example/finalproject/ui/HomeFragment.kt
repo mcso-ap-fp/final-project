@@ -1,5 +1,7 @@
 package com.example.finalproject.ui
 
+import android.content.res.AssetManager
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +11,8 @@ import androidx.fragment.app.activityViewModels
 import com.example.finalproject.MainActivity
 import com.example.finalproject.R
 import com.example.finalproject.databinding.FragmentHomeBinding
+import java.io.IOException
+import java.io.InputStream
 
 class HomeFragment: Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -33,6 +37,7 @@ class HomeFragment: Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        loadBanner()
         viewModel.observeUserDisplayName().observe(viewLifecycleOwner) {
             if (it != null)  {
                 binding.welcomeMessage.text = String.format(getString(R.string.welcome_message), it.substringBefore(" "))
@@ -50,6 +55,18 @@ class HomeFragment: Fragment() {
         binding.findRestaurant.setOnClickListener {
             val mainActivity: MainActivity = activity as MainActivity
             mainActivity.loadPreferencesFragment()
+        }
+    }
+
+    // https://stackoverflow.com/questions/7776445/in-android-can-i-use-image-from-assets-in-layout-xml
+    private fun loadBanner() {
+        val assetManager: AssetManager? = context?.assets
+        try {
+            val ims: InputStream? = assetManager?.open("food_banner.jpeg")
+            val d = Drawable.createFromStream(ims, null)
+            binding.foodPic.setImageDrawable(d)
+        } catch (ex: IOException) {
+            return
         }
     }
 }
