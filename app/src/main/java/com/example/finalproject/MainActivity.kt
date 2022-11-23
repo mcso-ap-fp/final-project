@@ -107,10 +107,11 @@ class MainActivity : AppCompatActivity() {
         signInLauncher.launch(signInIntent)
     }
 
-    fun launchRestaurantDetailActivity (radius: String, maxPrice: String) {
+    fun launchRestaurantDetailActivity (radius: String, maxPrice: String, cuisine: String?) {
         val restaurantDetailIntent = Intent(this, RestaurantDetails::class.java)
         restaurantDetailIntent.putExtra(RestaurantDetails.radius, radius)
         restaurantDetailIntent.putExtra(RestaurantDetails.maxPrice, maxPrice)
+        restaurantDetailIntent.putExtra(RestaurantDetails.cuisine, cuisine)
         startActivity(restaurantDetailIntent)
     }
 

@@ -1,16 +1,17 @@
 package com.example.finalproject.ui
 
+import android.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.finalproject.MainActivity
 import com.example.finalproject.RVDiffAdapter
 import com.example.finalproject.databinding.FragmentPreferencesBinding
 import com.example.finalproject.model.CuisineRepository
-import kotlin.math.max
 
 class PreferencesFragment: Fragment() {
     private lateinit var adapter: RVDiffAdapter
@@ -26,13 +27,9 @@ class PreferencesFragment: Fragment() {
         }
     }
 
-    // Todo: Init cuisine dropdown
     private fun initAdapter() {
-//        val recyclerView = binding.cuisineOptions
-//        adapter = RVDiffAdapter()
-//        adapter.submitList(cuisineRepository.fetchData())
-//        recyclerView.adapter = adapter
-//        recyclerView.layoutManager = LinearLayoutManager(context)
+        var adapter = ArrayAdapter(binding.cuisineOptions.context, R.layout.simple_spinner_item, cuisineRepository.fetchData())
+        binding.cuisineOptions.adapter = adapter
     }
 
     override fun onCreateView(
@@ -61,12 +58,15 @@ class PreferencesFragment: Fragment() {
 
     private fun submitPreferences() {
         val maxDistance = milesToMeters(binding.distanceSlider.value.toDouble()).toString()
-        val cuisine = ""
+        var cuisine: String? = binding.cuisineOptions.selectedItem.toString()
         val maxPrice = binding.priceSlider.value.toInt().toString()
+
+        if (cuisine == "No Preference")
+            cuisine = null
 
         // Launch Restaurant Activity
         val mainActivity: MainActivity = activity as MainActivity
-        mainActivity.launchRestaurantDetailActivity(maxDistance, maxPrice)
+        mainActivity.launchRestaurantDetailActivity(maxDistance, maxPrice, cuisine)
     }
 
     private fun cancel () {

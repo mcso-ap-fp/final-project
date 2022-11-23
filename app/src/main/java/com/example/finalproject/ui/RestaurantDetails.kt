@@ -4,15 +4,13 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.finalproject.R
-import com.example.finalproject.databinding.ActivityMainBinding
 import com.example.finalproject.databinding.ActivityRestaurantDetailsBinding
-import com.example.finalproject.databinding.RestaurantDetailsBinding
 
 class RestaurantDetails: AppCompatActivity() {
     companion object {
         const val radius = "radius"
         const val maxPrice = "maxPrice"
+        const val cuisine = "cuisine"
     }
 
     private val viewModel: MainViewModel by viewModels()
@@ -26,7 +24,6 @@ class RestaurantDetails: AppCompatActivity() {
         return adapter
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val activityRestaurantDetailsBinding = ActivityRestaurantDetailsBinding.inflate(layoutInflater)
@@ -39,13 +36,10 @@ class RestaurantDetails: AppCompatActivity() {
             adapter.submitList(it)
         }
 
-        viewModel.netRestaurants(intent?.extras?.getString(radius), intent?.extras?.getString(
-            maxPrice
-        ))
-
-
-        //activityRestaurantDetailsBinding.root.
-     //   viewModel.netRestaurants()
+        val radius: String? = intent?.extras?.getString(radius)
+        val maxPrice: String? = intent?.extras?.getString(maxPrice)
+        val cuisine: String? = intent?.extras?.getString(cuisine)
+        viewModel.netRestaurants(radius, maxPrice, cuisine)
     }
 
     // TODO: Allow user to click phone number and call restaurant
