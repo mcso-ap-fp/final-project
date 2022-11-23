@@ -2,8 +2,8 @@ package com.example.finalproject.api
 
 class PlacesRepository (private val api: PlacesApi) {
 
-    suspend fun getRestaurants(city: String, apikey : String) : List<RestaurantData> {
-        var resturants = api.getRestaurant(city, apikey)
+    suspend fun getRestaurants(city: String, apikey: String, radius: String?, maxPrice: String?) : List<RestaurantData> {
+        var resturants = api.getRestaurant(city, apikey, radius, maxPrice)
         var outputRestaurants = mutableListOf<RestaurantData>()
 
         for (item in resturants.results) {

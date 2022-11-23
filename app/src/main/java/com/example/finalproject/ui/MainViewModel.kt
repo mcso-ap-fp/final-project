@@ -25,9 +25,10 @@ class MainViewModel : ViewModel() {
     private val origin = ""
 
 
-    fun netRestaurants(){
+    fun netRestaurants(radius: String?, maxPrice: String?){
         viewModelScope.launch(context = viewModelScope.coroutineContext + Dispatchers.IO){
-            currentRestaurants.postValue(placesRepository.getRestaurants(city, apiKey))
+            val restaurants = placesRepository.getRestaurants(city, apiKey, radius, maxPrice)
+            currentRestaurants.postValue(restaurants)
         }
     }
 

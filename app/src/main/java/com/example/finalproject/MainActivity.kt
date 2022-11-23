@@ -52,9 +52,9 @@ class MainActivity : AppCompatActivity() {
 
         addHomeFragment()
 
-        activityMainBinding.contentMain.viewResults.setOnClickListener {
-            launchRestaurantDetailActivity()
-        }
+//        activityMainBinding.contentMain.viewResults.setOnClickListener {
+//            launchRestaurantDetailActivity()
+//        }
         //Places.initialize(applicationContext, apiKey)
         //placesClient = Places.createClient(this)
 
@@ -62,9 +62,6 @@ class MainActivity : AppCompatActivity() {
 
         //    types :
         //}
-        viewModel.netRestaurants()
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -110,8 +107,10 @@ class MainActivity : AppCompatActivity() {
         signInLauncher.launch(signInIntent)
     }
 
-    private fun launchRestaurantDetailActivity () {
+    fun launchRestaurantDetailActivity (radius: String, maxPrice: String) {
         val restaurantDetailIntent = Intent(this, RestaurantDetails::class.java)
+        restaurantDetailIntent.putExtra(RestaurantDetails.radius, radius)
+        restaurantDetailIntent.putExtra(RestaurantDetails.maxPrice, maxPrice)
         startActivity(restaurantDetailIntent)
     }
 

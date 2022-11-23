@@ -19,7 +19,7 @@ import java.lang.reflect.Type
 interface PlacesApi {
 
     @GET("/maps/api/place/textsearch/json?")
-    suspend fun getRestaurant(@Query("query")city : String, @Query("key")apikey: String) : PlacesReponse
+    suspend fun getRestaurant(@Query("query")city : String, @Query("key")apikey: String, @Query("radius")radius: String?, @Query("maxprice")maxprice: String?) : PlacesReponse
 
     class PlacesReponse(
         val html_atrributions : List<String?>,

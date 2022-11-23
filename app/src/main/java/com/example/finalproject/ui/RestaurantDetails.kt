@@ -10,6 +10,10 @@ import com.example.finalproject.databinding.ActivityRestaurantDetailsBinding
 import com.example.finalproject.databinding.RestaurantDetailsBinding
 
 class RestaurantDetails: AppCompatActivity() {
+    companion object {
+        const val radius = "radius"
+        const val maxPrice = "maxPrice"
+    }
 
     private val viewModel: MainViewModel by viewModels()
 
@@ -28,7 +32,6 @@ class RestaurantDetails: AppCompatActivity() {
         val activityRestaurantDetailsBinding = ActivityRestaurantDetailsBinding.inflate(layoutInflater)
         setContentView(activityRestaurantDetailsBinding.root)
 
-        // TODO initialize RestaurantDetailsAdapter
         var adapter = initAdapter(activityRestaurantDetailsBinding)
         activityRestaurantDetailsBinding.recyclerView.adapter = adapter
 
@@ -36,11 +39,14 @@ class RestaurantDetails: AppCompatActivity() {
             adapter.submitList(it)
         }
 
-        //activityRestaurantDetailsBinding.root.
-        viewModel.netRestaurants()
-    }
+        viewModel.netRestaurants(intent?.extras?.getString(radius), intent?.extras?.getString(
+            maxPrice
+        ))
 
-    // TODO: Allow user to click address and get directions
+
+        //activityRestaurantDetailsBinding.root.
+     //   viewModel.netRestaurants()
+    }
 
     // TODO: Allow user to click phone number and call restaurant
 
