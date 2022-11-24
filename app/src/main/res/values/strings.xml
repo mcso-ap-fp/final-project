@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Final Project</string>
+    <string name="will_you_be_dining_solo_or_with_a_group">Will you be dining solo or with a group?</string>
+    <string name="logout">Logout</string>
+    <string name="welcome_message">Welcome, %1$s!</string>
+    <string name="cuisines">Cuisine Type:</string>
+    <string name="price_range">Price Range:</string>
+    <string name="max_distance_miles">Max Distance (Miles):</string>
+    <string name="continue_string">Continue</string>
+    <string name="cancel_string">Cancel</string>
+    <string name="let_s_help_you_decide_where_to_eat">Let\'s help you decide where to eat!</string>
+    <string name="find_a_restaurant">Find a Restaurant</string>
+    <string name="select_your_dining_preferences">Select your preferences.</string>
 </resources>
