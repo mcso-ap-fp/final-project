@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.finalproject.model.UserPreferences
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.*
 
 class ViewModelDBHelper() {
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
@@ -24,17 +25,21 @@ class ViewModelDBHelper() {
             }
     }
 
-    fun createUserPreferences(
-        userPreferences: UserPreferences,
+    fun addOrUpdateUserPreferences(
+        userPreferences: List<UserPreferences>,
         userPreferencesList: MutableLiveData<List<UserPreferences>>
     ) {
-        db.collection(userPreferenceCollection)
-            .add(userPreferences)
-            .addOnSuccessListener {
-                dbFetchUserPreferences(userPreferencesList)
+        db.runBatch {
+            userPreferences.forEach {
+                val id = it.firestoreID ?: UUID.randomUUID().toString()
+                db.collection(userPreferenceCollection)
+                    .document(id)
+                    .set(it)
             }
-            .addOnFailureListener { e ->
-                Log.e(javaClass.simpleName, "Error ", e)
-            }
+        }.addOnSuccessListener {
+            dbFetchUserPreferences(userPreferencesList)
+        }.addOnFailureListener { e ->
+            Log.e(javaClass.simpleName, "Error ", e)
+        }
     }
 }

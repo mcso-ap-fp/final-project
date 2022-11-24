@@ -11,7 +11,7 @@ enum class PreferenceTypes(val type: String) {
 }
 
 data class UserPreferences (
-    @DocumentId var firestoreID: String = "",
+    @DocumentId var firestoreID: String? = "",
     @ServerTimestamp val timeStamp: Timestamp? = null,
     var user: String = "",
     var preferenceType: String = "",

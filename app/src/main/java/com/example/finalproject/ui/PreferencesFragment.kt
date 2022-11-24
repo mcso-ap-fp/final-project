@@ -11,19 +11,19 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.finalproject.MainActivity
 import com.example.finalproject.PreferencesViewModel
-import com.example.finalproject.RVDiffAdapter
 import com.example.finalproject.databinding.FragmentPreferencesBinding
 import com.example.finalproject.model.CuisineRepository
 import com.example.finalproject.model.PreferenceTypes
+import com.example.finalproject.model.UserPreferences
+import com.google.firebase.auth.FirebaseAuth
 
 class PreferencesFragment: Fragment() {
-    private lateinit var adapter: RVDiffAdapter
     private val cuisineRepository = CuisineRepository()
     private var _binding: FragmentPreferencesBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: MainViewModel by activityViewModels()
     private val preferencesViewModel: PreferencesViewModel by activityViewModels()
     private val cuisineList = cuisineRepository.fetchData()
+    private var preferencesList: List<UserPreferences> = emptyList()
 
     companion object {
         const val tag = "preferencesFragTag"
@@ -33,7 +33,7 @@ class PreferencesFragment: Fragment() {
     }
 
     private fun initAdapter() {
-        var adapter = ArrayAdapter(binding.cuisineOptions.context, R.layout.simple_spinner_item, cuisineList)
+        val adapter = ArrayAdapter(binding.cuisineOptions.context, R.layout.simple_spinner_item, cuisineList)
         binding.cuisineOptions.adapter = adapter
     }
 
@@ -50,7 +50,8 @@ class PreferencesFragment: Fragment() {
         initAdapter()
         preferencesViewModel.fetchInitialPreferences()
 
-        preferencesViewModel.observePreferences().observe(viewLifecycleOwner) { it ->
+        preferencesViewModel.observePreferences().observe(viewLifecycleOwner) {
+            preferencesList = it
             it.forEach { preference ->
                when (preference.preferenceType) {
                    PreferenceTypes.CUISINE.type -> {
@@ -77,6 +78,7 @@ class PreferencesFragment: Fragment() {
         }
 
         binding.save.setOnClickListener {
+            savePreferences()
             submitPreferences()
         }
 
@@ -85,6 +87,51 @@ class PreferencesFragment: Fragment() {
         }
 
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun savePreferences() {
+        if (preferencesList.isNotEmpty()) {
+            preferencesList.forEach {
+                when (it.preferenceType) {
+                    PreferenceTypes.CUISINE.type -> {
+                        it.preferenceValue = binding.cuisineOptions.selectedItem.toString()
+                    }
+                    PreferenceTypes.PRICE.type -> {
+                        it.preferenceValue = binding.priceSlider.value.toString()
+                    }
+                    PreferenceTypes.DISTANCE.type -> {
+                        it.preferenceValue = binding.distanceSlider.value.toString()
+                    }
+                }
+            }
+            preferencesViewModel.updatePreferences(preferencesList)
+        } else {
+            val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid
+            currentUserUid?.let {
+                val price = UserPreferences(
+                    null,
+                    null,
+                    currentUserUid,
+                    PreferenceTypes.PRICE.type,
+                    binding.priceSlider.value.toString()
+                )
+                val distance = UserPreferences(
+                    null,
+                    null,
+                    currentUserUid,
+                    PreferenceTypes.DISTANCE.type,
+                    binding.distanceSlider.value.toString()
+                )
+                val cuisine = UserPreferences(
+                    null,
+                    null,
+                    currentUserUid,
+                    PreferenceTypes.CUISINE.type,
+                    binding.cuisineOptions.selectedItem.toString()
+                )
+                preferencesViewModel.updatePreferences(listOf(price, distance, cuisine))
+            }
+        }
     }
 
 

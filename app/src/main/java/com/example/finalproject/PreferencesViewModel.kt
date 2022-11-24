@@ -17,13 +17,8 @@ class PreferencesViewModel: ViewModel() {
         return preferences
     }
 
-//
-//    fun updateNote(position: Int, text: String, pictureUUIDs: List<String>) {
-//        val note = getNote(position)
-//        // Have to update text before calling updateNote
-//        note.text = text
-//        note.pictureUUIDs = pictureUUIDs
-//        dbHelp.updateNote(note, notesList)
-//    }
+    fun updatePreferences(newPreferences: List<UserPreferences>) {
+        dbHelper.addOrUpdateUserPreferences(newPreferences, preferences)
+    }
 
 }
