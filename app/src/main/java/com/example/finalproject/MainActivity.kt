@@ -104,6 +104,11 @@ class MainActivity : AppCompatActivity() {
             .setIsSmartLockEnabled(false)
             .build()
 
+        // We want to direct the user back to the home fragment on login
+        supportFragmentManager.commit {
+            replace(R.id.main_frame, HomeFragment.newInstance(), HomeFragment.tag)
+        }
+
         signInLauncher.launch(signInIntent)
     }
 
