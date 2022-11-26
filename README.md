@@ -6,7 +6,6 @@ Make sure your report specifies the following items, but bear in mind that the r
 Include what you think is necessary to convince me of that fact. 
 I love hearing about debugging war stories. I'm serious, it is a problem for me.
 
-
 ## Team Members
 - Althea Smith
   - ars_610@yahoo.com
@@ -15,13 +14,13 @@ I love hearing about debugging war stories. I'm serious, it is a problem for me.
   - simon.weisser@utexas.edu
   - saw3548
 
-
 ## Title 
 Report the title of your app
 
 ## Description
-Our app is designed to help individuals or groups decide on a location to eat based on their dining preferences. The goal is to please the most members of the group while avoiding the “I don’t care you pick” circular conversation. We will utilize the output of a recommendation algorithm as input to the Google Maps API to display details of the best nearby restaurants. 
- 
+Our app is designed to help individuals or groups decide on a location to eat based on their dining preferences. 
+We pass the user or group's preferences as input to the Google Maps API to display details of the best nearby restaurants.  
+
 ## Screenshot
 Include a screenshot of your app, hopefully one that illustrates key functionality.
 
@@ -34,8 +33,17 @@ List all third party libraries you use, and what they do for your app (each in t
 Describe briefly what was good and/or challenging about using them.
 
 ## Services
-List all third party services you use, and what they do for your app (each in their own paragraph). 
+List all third party services you use, and what they do for your app (each in their own paragraph).
 Describe briefly what was good and/or challenging about using them.
+
+Firebase Authentication - Authentication was used to allow users to sign in/ sign out to keep track
+of their dining preferences. All dining preferences are linked to user UID's as seen in the DB schema below 
+making it simple to fetch the current user's dining preferences when they are looking for a place to eat. 
+
+Firestore Database - We used Firestore DB in order to keep track of our users' preferences from session to session. 
+For this project we had to do research on batch transactions so we could update all of the preferences at once. 
+I was pleased to find that Firestore has a set method which will create a document if 
+one does not exist or update it if it does exist. This made storing/managing user preferences easy for both new and existing users. 
 
 ## UI/UX
 Discuss anything noteworthy about your UI/UX/display code.
@@ -48,13 +56,15 @@ Discuss the most important or interesting thing you learned doing your project.
 Discuss the most difficult challenge you overcame and/or your most interesting debugging story.
 
 ## Local Setup
+1. Create and connect to a Firebase project: https://firebase.google.com/docs/android/setup
+2. Enable Authentication and Firestore DB via the Firebase console
+
+
 If necessary, briefly tell us how to build and run your project. Include details about how to set back end services (if you use them). 
 In the common case, we will rely on your demo, but just in case we have an issue, we'd like some tips.
 
 ## Database Schema
-If you use firebase, include a screenshot of your database schema. 
-The schema is basically the structure and the type information. 
-So print out the keys and values and the types for any important data you have in the database.
+![](app/src/main/assets/DB Schema.png)
 
 ## Lines of Code
 
