@@ -64,7 +64,8 @@ If necessary, briefly tell us how to build and run your project. Include details
 In the common case, we will rely on your demo, but just in case we have an issue, we'd like some tips.
 
 ## Database Schema
-![](app/src/main/assets/DB Schema.png)
+
+![](./app/src/main/assets/DBSchema.png)
 
 ## Lines of Code
 
