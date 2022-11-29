@@ -15,6 +15,7 @@ import com.example.finalproject.databinding.FragmentPreferencesBinding
 import com.example.finalproject.model.CuisineRepository
 import com.example.finalproject.model.PreferenceTypes
 import com.example.finalproject.model.UserPreferences
+import com.google.android.material.slider.LabelFormatter
 import com.google.firebase.auth.FirebaseAuth
 
 class PreferencesFragment: Fragment() {
@@ -50,8 +51,19 @@ class PreferencesFragment: Fragment() {
         initAdapter()
         preferencesViewModel.fetchInitialPreferences()
 
+        binding.priceSlider.setLabelFormatter {
+            "$".repeat(it.toInt()+1)
+        }
+
+        binding.distanceSlider.setLabelFormatter {
+            "${it.toInt()} mi."
+        }
+
         preferencesViewModel.observePreferences().observe(viewLifecycleOwner) {
             preferencesList = it
+            binding.priceSlider.labelBehavior = LabelFormatter.LABEL_VISIBLE
+            binding.distanceSlider.labelBehavior = LabelFormatter.LABEL_VISIBLE
+
             it.forEach { preference ->
                when (preference.preferenceType) {
                    PreferenceTypes.CUISINE.type -> {

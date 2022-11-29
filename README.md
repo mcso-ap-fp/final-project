@@ -29,6 +29,9 @@ List the APIs your app uses, for example Google maps.
 Also let me know if you use certain Android features extensively like animation or you have custom controllers (navigation drawer, action bar, etc.).
 
 ## Libraries
+Material Design - We used this library to access additional components for our app like the Sliders found in the user preferences 
+fragment. This library has fairly detailed documentation (https://m2.material.io/develop/android) which made it easy to set up and customize the components.
+
 List all third party libraries you use, and what they do for your app (each in their own paragraph). 
 Describe briefly what was good and/or challenging about using them.
 

@@ -54,7 +54,7 @@ class SingleRestaurantDetails: AppCompatActivity() {
                 startActivity(intent)
             }
 
-            singleRestaurantDetailsBinding.summary.text = it.editorial_summary.overview
+            singleRestaurantDetailsBinding.summary.text = it.editorial_summary?.overview
 
             var hours_string = ""
             for (x in it.current_opening_hours.weekday_text) {
