@@ -45,9 +45,6 @@ class Directions : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        //val direcionsMapBinding = DirecionsMapBinding.inflate(layoutInflater)
-        //setContentView(direcionsMapBinding.root)
         setContentView(R.layout.direcions_map)
         checkGooglePlayServices()
 
@@ -71,21 +68,27 @@ class Directions : AppCompatActivity(), OnMapReadyCallback {
             return
         }
 
+        val mapFragment = supportFragmentManager
+            .findFragmentById(R.id.mapFrag) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+
         // Save current location
         fusedLocationProviderClient.lastLocation.addOnSuccessListener(this) {
-            originLat = it.latitude
-            originLon = it.longitude
 
-            var startCoords = geocoder.getFromLocation(it.latitude, it.longitude, 1)
-            origin = startCoords.get(0).getAddressLine(0) + " " + startCoords.get(0).locality.toString()
-            viewModel.netDirections(address!!, origin!!)
+            if (it != null && it.latitude != null && it.longitude != null) {
+                originLat = it.latitude
+                originLon = it.longitude
 
-            val mapFragment = supportFragmentManager
-                .findFragmentById(R.id.mapFrag) as SupportMapFragment
-            mapFragment.getMapAsync(this)
+                var startCoords = geocoder.getFromLocation(it.latitude, it.longitude, 1)
+                origin = startCoords.get(0)
+                    .getAddressLine(0) + " " + startCoords.get(0).locality.toString()
+                viewModel.netDirections(address!!, origin!!)
+            } else {
+                Toast.makeText(this, "Can not load directions", Toast.LENGTH_LONG).show()
+                this.finish()
+            }
 
         }
-
 
 
     }
@@ -117,21 +120,6 @@ class Directions : AppCompatActivity(), OnMapReadyCallback {
             overlayPresent = false
         }
 
-        // Exit if directions not loaded
-        if (origin == "") {
-            Toast.makeText(this, "Can not load directions", Toast.LENGTH_LONG).show()
-            this.finish()
-        }
-
-        // Go to initial location
-        if (origin != "") {
-            var latlng = LatLng(originLat, originLon)
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 15.0f))
-
-        } else {
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(nearMopacAndWAnderson, 15.0f))
-        }
-
 
         viewModel.getDirections().observe(this) {
             for (x in it.first().legs.first().steps) {
@@ -139,6 +127,8 @@ class Directions : AppCompatActivity(), OnMapReadyCallback {
                     PolylineOptions().addAll(PolyUtil.decode(x.polyline.points)).color(Color.RED)
                 )
             }
+            var latlng = LatLng(originLat, originLon)
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 15.0f))
         }
 
     }
