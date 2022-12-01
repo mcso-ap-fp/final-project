@@ -85,6 +85,8 @@ In the common case, we will rely on your demo, but just in case we have an issue
 
 ## Lines of Code
 
+![Screen Shot 2022-11-30 at 8 46 05 PM](https://user-images.githubusercontent.com/60682487/204955937-8ea82c16-2947-4e9b-9ddb-8241463bfbba.png)
+
 Report the count of lines of code in your project. Use cloc (http://cloc.sourceforge.net/) to count the lines. Run this command on your code.
 cloc -by-file-by-lang app/src/main/
 Report the total Java and total XML lines that you wrote. Do not include boilerplate lines, external libraries, or other sources in the total of lines on which you claim authorship.
