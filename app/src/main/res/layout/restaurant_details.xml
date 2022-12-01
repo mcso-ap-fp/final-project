@@ -12,10 +12,11 @@
         android:id="@+id/restaurantName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="20dp"
         app:layout_constraintEnd_toStartOf="@+id/restaurantRating"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textStyle="bold"/>
 
     <!--  Todo make this a cool star graphic or something? -->
     <TextView
@@ -23,16 +24,20 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center_vertical"
+        android:layout_marginEnd="5dp"
+        android:textColor="#FF000000"
+        app:layout_constraintEnd_toStartOf="@id/icon"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/restaurantDescription"
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/restaurantName" />
+        android:src="@drawable/ic_favorite_black_24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <!-- TODO: Maybe add in business hours or some other details -->
 
@@ -40,10 +45,10 @@
         android:id="@+id/restaurantAddress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/restaurantPhoneNumber"
-        app:layout_constraintTop_toBottomOf="@+id/restaurantDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/restaurantName" />
 
     <TextView
         android:id="@+id/restaurantPhoneNumber"
@@ -51,30 +56,42 @@
         android:layout_height="wrap_content"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/restaurantDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/restaurantAddress" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/restaurantAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="MissingConstraints">
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:id="@+id/menu"
-            android:text="Menu"
-            android:gravity="start"
+            android:text="Details"
+            android:textSize="12sp"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:layout_gravity="right"
             />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:visibility="invisible"
+            android:clickable="false"/>
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:id="@+id/directions"
             android:text="Directions"
+            android:textSize="12sp"
             android:clickable="true"
-            android:gravity="end"
+            android:gravity="center_vertical"
+            android:layout_gravity="right"
+            android:layout_weight="3"
             />
 
 

@@ -3,9 +3,7 @@ package com.example.finalproject.ui
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.*
 import com.example.finalproject.MainActivity
 import com.example.finalproject.api.RestaurantData
 import com.example.finalproject.api.Review
@@ -26,15 +24,16 @@ class ReviewsAdapter :
         return VH(binding)
     }
 
+
     override fun onBindViewHolder(holder: VH, position: Int) {
         val binding = holder.restaurantReviewsBinding
 
-        // TODO bind restaurant details to layout
         val item = getItem(position)
+
 
         binding.author.text = item.author_name
         binding.review.text = item.text
-        binding.time.text = item.relative_time_description
+        binding.time.text = "- " + item.relative_time_description
         binding.rating.text = item.rating.toString()
 
     }
