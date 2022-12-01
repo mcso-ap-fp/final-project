@@ -1,6 +1,10 @@
 package com.example.finalproject.ui
 
+import android.R
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -42,8 +46,12 @@ class RestaurantDetails: AppCompatActivity() {
         activityRestaurantDetailsBinding.recyclerView.adapter = adapter
 
         viewModel.observeRestaurants().observe(this){
-            adapter.submitList(it)
+            adapter.submitList(it) {
+                activityRestaurantDetailsBinding.recyclerView.scrollToPosition(0)
+            }
         }
+
+        initSortSpinner(activityRestaurantDetailsBinding)
 
         val radius: String? = intent?.extras?.getString(radius)
         val maxPrice: String? = intent?.extras?.getString(maxPrice)
@@ -51,5 +59,26 @@ class RestaurantDetails: AppCompatActivity() {
         viewModel.netRestaurants(radius, maxPrice, cuisine)
     }
 
+    private fun initSortSpinner(binding: ActivityRestaurantDetailsBinding) {
+        val adapter = ArrayAdapter(
+            binding.sort.context,
+            R.layout.simple_spinner_item,
+            listOf("None", "Rating", "Name")
+        )
+
+        binding.sort.adapter = adapter
+
+        binding.sort.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                viewModel.setSortField(parent?.getItemAtPosition(position).toString())
+            }
+        }
+    }
 
 }

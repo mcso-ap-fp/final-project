@@ -11,4 +11,5 @@
     <string name="let_s_help_you_decide_where_to_eat">Let\'s help you decide where to eat!</string>
     <string name="find_a_restaurant">Find a Restaurant</string>
     <string name="select_your_dining_preferences">Select your preferences.</string>
+    <string name="sort_by">Sort By:</string>
 </resources>
