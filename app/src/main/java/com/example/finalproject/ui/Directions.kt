@@ -74,7 +74,7 @@ class Directions : AppCompatActivity(), OnMapReadyCallback {
             originLon = it.longitude
 
             var startCoords = geocoder.getFromLocation(it.latitude, it.longitude, 1)
-            origin = startCoords.get(0).getAddressLine(0) + " " + startCoords.get(0).locality.toString() + " " + address
+            origin = startCoords.get(0).getAddressLine(0) + " " + startCoords.get(0).locality.toString()
             viewModel.netDirections(address!!, origin!!)
 
             val mapFragment = supportFragmentManager
