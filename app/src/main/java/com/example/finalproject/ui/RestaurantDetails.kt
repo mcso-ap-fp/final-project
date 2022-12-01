@@ -3,7 +3,9 @@ package com.example.finalproject.ui
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.databinding.ActivityRestaurantDetailsBinding
 
 class RestaurantDetails: AppCompatActivity() {
@@ -24,11 +26,18 @@ class RestaurantDetails: AppCompatActivity() {
         return adapter
     }
 
+    private fun initRecyclerViewDividers(rv: RecyclerView) {
+        val dividerItemDecoration = DividerItemDecoration(
+            rv.context, LinearLayoutManager.VERTICAL )
+        rv.addItemDecoration(dividerItemDecoration)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val activityRestaurantDetailsBinding = ActivityRestaurantDetailsBinding.inflate(layoutInflater)
         setContentView(activityRestaurantDetailsBinding.root)
 
+        initRecyclerViewDividers(activityRestaurantDetailsBinding.recyclerView)
         var adapter = initAdapter(activityRestaurantDetailsBinding)
         activityRestaurantDetailsBinding.recyclerView.adapter = adapter
 
@@ -42,6 +51,5 @@ class RestaurantDetails: AppCompatActivity() {
         viewModel.netRestaurants(radius, maxPrice, cuisine)
     }
 
-    // TODO: Allow user to click phone number and call restaurant
 
 }

@@ -2,6 +2,7 @@ package com.example.finalproject.ui
 
 import android.content.Context
 import android.content.Intent
+import android.webkit.WebStorage.Origin
 import androidx.lifecycle.*
 import com.example.finalproject.api.*
 import com.google.android.datatransport.runtime.Destination
@@ -20,11 +21,10 @@ class MainViewModel : ViewModel() {
 
     private val userDisplayName = MutableLiveData<String>()
 
-    private val city = "restaurants austin"
-    private val apiKey = ""
-    private val origin = ""
+    private val apiKey = "AIzaSyDpDP44Eof2LUs__NZ32Xm_uhwrsFICGZM"
 
 
+    // Load new restaurants
     fun netRestaurants(radius: String?, maxPrice: String?, cuisine: String?){
         var cuisineSearch = "restaurants"
         cuisine?.let { cuisineSearch = "$it restaurants"}
@@ -39,7 +39,8 @@ class MainViewModel : ViewModel() {
         return currentRestaurants
     }
 
-    fun netDirections(restaurant_address:String){
+    // Load directions to restaurant
+    fun netDirections(restaurant_address:String, origin: String){
         viewModelScope.launch(context = viewModelScope.coroutineContext + Dispatchers.IO){
             currentDirections.postValue(placesRepository.getDirections(origin, restaurant_address, apiKey))
         }
@@ -49,6 +50,7 @@ class MainViewModel : ViewModel() {
         return currentDirections
     }
 
+    // Load details of single restaurant
     fun netSingleRestaurant(place_id: String){
         viewModelScope.launch(context = viewModelScope.coroutineContext + Dispatchers.IO){
             currentSingleRestaurant.postValue(placesRepository.getRestaurantDetails(place_id, apiKey))
@@ -67,4 +69,5 @@ class MainViewModel : ViewModel() {
     fun observeUserDisplayName(): LiveData<String> {
         return userDisplayName
     }
+
 }

@@ -1,6 +1,7 @@
 package com.example.finalproject.ui
 
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -35,7 +36,7 @@ class RestaurantDetailsAdapter :
         binding.restaurantName.text = item.restaurantName
         binding.restaurantAddress.text = item.address
         binding.restaurantRating.text = item.rating
-
+        //binding.menu.setBackgroundColor(Color.TRANSPARENT)
 
         binding.directions.setOnClickListener {
             val directions_intent = Intent(it.context, Directions::class.java)
