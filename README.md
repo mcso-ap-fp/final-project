@@ -28,6 +28,11 @@ Include a screenshot of your app, hopefully one that illustrates key functionali
 List the APIs your app uses, for example Google maps. 
 Also let me know if you use certain Android features extensively like animation or you have custom controllers (navigation drawer, action bar, etc.).
 
+Google Places Text Search - this api was used for fetching restaurants based on the users dining preference, and has minimal details about the restaurant.
+Google Places Details - this api was used for fetching specific details about one given restaurant (description, hours, reviews, etc)
+Google Places Directions - this api was used for finding directions between the users starting location and the restaurant location.
+FusedLocationProviderClient - used to find the current location of the Android device.
+
 ## Libraries
 Material Design - We used this library to access additional components for our app like the Sliders found in the user preferences 
 fragment. This library has fairly detailed documentation (https://m2.material.io/develop/android) which made it easy to set up and customize the components.
@@ -51,16 +56,24 @@ one does not exist or update it if it does exist. This made storing/managing use
 ## UI/UX
 Discuss anything noteworthy about your UI/UX/display code.
 
+Nothing too complex here. We just have different views for the different functionality that users can click through. We use two recycle views, and also use google maps. We also have a button for calling the restaurant which is not possible to fully test using an emulator.
+
 ## Back End
 Discuss anything noteworthy about your back end or processing logic.
+
+We essentially make different API requests for the different functionality we have. When a user wants to select a restaurant to eat at, we load restaurants based on proximity, cuisine, and price. We list restaurants with their title, average rating, address and price. The user can also sort these results. If the user is interested in the restaurant, the can click on it and trigger another api call using the selected restaurants google places api id and we then display more detailed information such as a description, the hours, dining options and reviews. From the initial list of restaurants, the user can also hit directions where we then use FusedLocationProviderClient to get the users current address, and then using the restaurants address we make a call to google maps directions api to get the polylines and place it onto the map in the activity to show directions to the restaurant.
 
 ## Learnings / Challenges 
 Discuss the most important or interesting thing you learned doing your project.
 Discuss the most difficult challenge you overcame and/or your most interesting debugging story.
 
+The most difficult challenge was getting the directions feature up and running. After initially realizing that I was not able to map out directions to the restaurant, I was able to figure out that the reason was the location of my emulator was accross the country in California. I figured out how I can change the location of my phone in the emulator. Afterwards, I was having issues using FusedLocationProviderClient to access my current location. After extensive debugging, I figured out that I was loading the map prior to actually fetching the current location. I was able to resolved this by loading the map within an on OnCompletionListener for the current address.
+
 ## Local Setup
 1. Create and connect to a Firebase project: https://firebase.google.com/docs/android/setup
 2. Enable Authentication and Firestore DB via the Firebase console
+3. Set up API Key (for the sake of simplicity we left ours unrestricted)
+4. If using an Emulator, make sure to change the location to represent your actual physical location.
 
 
 If necessary, briefly tell us how to build and run your project. Include details about how to set back end services (if you use them). 
