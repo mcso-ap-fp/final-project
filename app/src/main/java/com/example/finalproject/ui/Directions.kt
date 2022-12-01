@@ -55,7 +55,6 @@ class Directions : AppCompatActivity(), OnMapReadyCallback {
 
         //  Check permissions and get current location
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this@Directions)
-
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -76,9 +75,10 @@ class Directions : AppCompatActivity(), OnMapReadyCallback {
         fusedLocationProviderClient.lastLocation.addOnSuccessListener(this) {
 
             if (it != null && it.latitude != null && it.longitude != null) {
+
+                // Get current location and use it to find directions to restaurant
                 originLat = it.latitude
                 originLon = it.longitude
-
                 var startCoords = geocoder.getFromLocation(it.latitude, it.longitude, 1)
                 origin = startCoords.get(0)
                     .getAddressLine(0) + " " + startCoords.get(0).locality.toString()
@@ -120,7 +120,15 @@ class Directions : AppCompatActivity(), OnMapReadyCallback {
             overlayPresent = false
         }
 
+        // If current location not yet loaded, initialize to somewhere in Austin
+        if (origin == "") {
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(nearMopacAndWAnderson, 15.0f))
+        } else {
+            var latlng = LatLng(originLat, originLon)
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 15.0f))
+        }
 
+        // Once directions are loaded, set camera to current location and fill in route
         viewModel.getDirections().observe(this) {
             for (x in it.first().legs.first().steps) {
                 map.addPolyline(
@@ -159,11 +167,11 @@ class Directions : AppCompatActivity(), OnMapReadyCallback {
                 } else -> {
                 Toast.makeText(this,
                     "Unable to show location - permission required",
-                    Toast.LENGTH_LONG).show()
-            }
+                    Toast.LENGTH_LONG).show() }
             }
         }
-        locationPermissionRequest.launch(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION))
+        locationPermissionRequest.launch(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION))
     }
 
 }

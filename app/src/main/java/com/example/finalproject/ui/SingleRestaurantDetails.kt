@@ -1,11 +1,16 @@
 package com.example.finalproject.ui
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -39,6 +44,28 @@ class SingleRestaurantDetails: AppCompatActivity() {
         rv.addItemDecoration(dividerItemDecoration)
     }
 
+    // Check phone call permission
+    private fun RequestPermission() {
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CALL_PHONE),
+        1)
+    }
+
+    // Grant phone call permission
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray){
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        val singleRestaurantDetailsBinding = ActivitySingleRestaurantDetailsBinding.inflate(layoutInflater)
+
+        if (requestCode == 1) {
+            val intent = Intent(Intent.ACTION_CALL)
+            var phoneNumber = singleRestaurantDetailsBinding.phoneNumber.text.toString().filterNot { it.isWhitespace() }
+            intent.data = Uri.parse("tel:" + phoneNumber)
+            startActivity(intent)
+        } else {
+            Toast.makeText(this, "Permissions failed", Toast.LENGTH_SHORT)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val singleRestaurantDetailsBinding = ActivitySingleRestaurantDetailsBinding.inflate(layoutInflater)
@@ -61,8 +88,15 @@ class SingleRestaurantDetails: AppCompatActivity() {
             // Allow user to call restaurant
             singleRestaurantDetailsBinding.phoneNumber.setOnClickListener {
                 val intent = Intent(Intent.ACTION_CALL)
-                intent.data = Uri.parse("tel:" + singleRestaurantDetailsBinding.phoneNumber.text.toString())
-                startActivity(intent)
+                var phoneNumber = singleRestaurantDetailsBinding.phoneNumber.text.toString().filterNot { it.isWhitespace() }
+                intent.data = Uri.parse("tel:" + phoneNumber)
+
+                val permission = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE)
+                if (permission != PackageManager.PERMISSION_GRANTED) {
+                    RequestPermission()
+                } else {
+                    startActivity(intent)
+                }
             }
 
             singleRestaurantDetailsBinding.summary.text = it.editorial_summary?.overview
