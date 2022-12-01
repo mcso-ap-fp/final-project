@@ -15,6 +15,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.finalproject.MainActivity
 import com.example.finalproject.R
+import com.example.finalproject.databinding.DirecionsMapBinding
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -45,6 +46,8 @@ class Directions : AppCompatActivity(), OnMapReadyCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //val direcionsMapBinding = DirecionsMapBinding.inflate(layoutInflater)
+        //setContentView(direcionsMapBinding.root)
         setContentView(R.layout.direcions_map)
         checkGooglePlayServices()
 
@@ -74,13 +77,16 @@ class Directions : AppCompatActivity(), OnMapReadyCallback {
             originLon = it.longitude
 
             var startCoords = geocoder.getFromLocation(it.latitude, it.longitude, 1)
-            origin = startCoords.get(0).getAddressLine(0) + " " + startCoords.get(0).locality.toString() + " " + address
+            origin = startCoords.get(0).getAddressLine(0) + " " + startCoords.get(0).locality.toString()
             viewModel.netDirections(address!!, origin!!)
 
             val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.mapFrag) as SupportMapFragment
             mapFragment.getMapAsync(this)
+
         }
+
+
 
     }
 
@@ -88,12 +94,6 @@ class Directions : AppCompatActivity(), OnMapReadyCallback {
 
         map = googleMap
 
-        // Add directions in the form of red line
-        viewModel.getDirections().observe(this) {
-            for (x in it.first().legs.first().steps){
-                map.addPolyline(PolylineOptions().addAll(PolyUtil.decode(x.polyline.points)).color(Color.RED))
-            }
-        }
 
         // Get permission for map
         val permission = ContextCompat.checkSelfPermission(this,
@@ -131,6 +131,16 @@ class Directions : AppCompatActivity(), OnMapReadyCallback {
         } else {
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(nearMopacAndWAnderson, 15.0f))
         }
+
+
+        viewModel.getDirections().observe(this) {
+            for (x in it.first().legs.first().steps) {
+                map.addPolyline(
+                    PolylineOptions().addAll(PolyUtil.decode(x.polyline.points)).color(Color.RED)
+                )
+            }
+        }
+
     }
 
 
