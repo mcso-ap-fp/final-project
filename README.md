@@ -69,6 +69,7 @@ The most difficult challenge was getting the directions feature up and running. 
 1. Create and connect to a Firebase project: https://firebase.google.com/docs/android/setup
 2. Enable Authentication and Firestore DB via the Firebase console
 3. Set up API Key (for the sake of simplicity we left ours unrestricted)
+4. If using an Emulator, make sure to change the location to represent your actual physical location.
 
 
 If necessary, briefly tell us how to build and run your project. Include details about how to set back end services (if you use them). 
