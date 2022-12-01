@@ -56,8 +56,12 @@ one does not exist or update it if it does exist. This made storing/managing use
 ## UI/UX
 Discuss anything noteworthy about your UI/UX/display code.
 
+Nothing too complex here. We just have different views for the different functionality that users can click through. We use two recycle views, and also use google maps. We also have a button for calling the restaurant which is not possible to fully test using an emulator.
+
 ## Back End
 Discuss anything noteworthy about your back end or processing logic.
+
+We essentially make different API requests for the different functionality we have. When a user wants to select a restaurant to eat at, we load restaurants based on proximity, cuisine, and price. We list restaurants with their title, average rating, address and price. The user can also sort these results. If the user is interested in the restaurant, the can click on it and trigger another api call using the selected restaurants google places api id and we then display more detailed information such as a description, the hours, dining options and reviews. From the initial list of restaurants, the user can also hit directions where we then use FusedLocationProviderClient to get the users current address, and then using the restaurants address we make a call to google maps directions api to get the polylines and place it onto the map in the activity to show directions to the restaurant.
 
 ## Learnings / Challenges 
 Discuss the most important or interesting thing you learned doing your project.
