@@ -1,27 +1,45 @@
 package com.example.finalproject.ui
 
-import android.content.Context
-import android.content.Intent
-import android.webkit.WebStorage.Origin
 import androidx.lifecycle.*
 import com.example.finalproject.api.*
-import com.google.android.datatransport.runtime.Destination
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
-import okhttp3.internal.wait
 
 class MainViewModel : ViewModel() {
     private val placesApi = PlacesApi.create()
     private val placesRepository = PlacesRepository(placesApi)
-    private val currentRestaurants = MutableLiveData<List<RestaurantData>>()
+
     private val currentDirections = MutableLiveData<List<Route>>()
     private val currentSingleRestaurant = MutableLiveData<RestaurantDetailsData>()
+    private val sortField = MutableLiveData("Name")
+    private val currentRestaurants = MediatorLiveData<List<RestaurantData>>().apply {
+        addSource(sortField) { value = sortRestaurants(sortField.value!!) }
+    }
 
     private val userDisplayName = MutableLiveData<String>()
 
     private val apiKey = "AIzaSyDpDP44Eof2LUs__NZ32Xm_uhwrsFICGZM"
+
+    private fun sortRestaurants(field: String): List<RestaurantData> {
+        val restaurants: List<RestaurantData>? = currentRestaurants.value
+
+        val sortedRestaurants =  when (field) {
+            "Name" ->  restaurants?.sortedBy { it.restaurantName }
+            "Rating" -> restaurants?.sortedByDescending { it.rating }
+           else -> restaurants
+        }
+
+        sortedRestaurants?.let {
+            return sortedRestaurants
+        }
+
+        return emptyList()
+    }
+
+    fun setSortField(field: String) {
+        sortField.value = field
+    }
 
 
     // Load new restaurants
