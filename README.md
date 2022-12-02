@@ -165,4 +165,5 @@ Then click the "Code frequency" tab on the menu bar on the left. You will see th
 Put a screen shot of your code frequency figure into your writeup. Here is an example figure for reference. 
 If you don't have a pro account, or can't provide this data, that is ok.
 
-![Screen Shot 2022-11-30 at 8 46 05 PM](https://user-images.githubusercontent.com/60682487/204955937-8ea82c16-2947-4e9b-9ddb-8241463bfbba.png)
+![Screen Shot 2022-12-01 at 7 28 46 PM](https://user-images.githubusercontent.com/60682487/205194167-1e60f82f-3fad-4c9c-b755-fb54af848b07.png)
+
