@@ -1,9 +1,13 @@
 package com.example.finalproject.ui
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +15,7 @@ import com.example.finalproject.MainActivity
 import com.example.finalproject.api.RestaurantData
 import com.example.finalproject.databinding.RestaurantDetailsBinding
 
-class RestaurantDetailsAdapter :
+class RestaurantDetailsAdapter(private val distance: String?, private val price: String?, private val cuisine: String?, private val launchActivity: (intent: Intent)->Unit):
     ListAdapter<RestaurantData, RestaurantDetailsAdapter.VH>(DiffCallback()) {
 
     inner class VH(val restaurantDetailsBinding: RestaurantDetailsBinding) :
@@ -29,7 +33,6 @@ class RestaurantDetailsAdapter :
     override fun onBindViewHolder(holder: VH, position: Int) {
         val binding = holder.restaurantDetailsBinding
 
-        // TODO bind restaurant details to layout
         val item = getItem(position)
         //holder.itemView.
 
@@ -48,7 +51,10 @@ class RestaurantDetailsAdapter :
             val details_intent = Intent(it.context, SingleRestaurantDetails::class.java)
             details_intent.putExtra(MainActivity.placeIdKey, item.placeID)
             details_intent.putExtra(MainActivity.restaurantNameKey, binding.restaurantName.text)
-            it.context.startActivity(details_intent)
+            details_intent.putExtra("distance", distance)
+            details_intent.putExtra("price", price)
+            details_intent.putExtra("cuisine", cuisine)
+            launchActivity(details_intent)
         }
 
     }

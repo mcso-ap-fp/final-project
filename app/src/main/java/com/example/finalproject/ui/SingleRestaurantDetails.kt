@@ -1,16 +1,22 @@
 package com.example.finalproject.ui
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.MainActivity
 import com.example.finalproject.R
+import com.example.finalproject.api.RestaurantData
 import com.example.finalproject.databinding.ActivityMainBinding
 import com.example.finalproject.databinding.ActivityRestaurantDetailsBinding
 import com.example.finalproject.databinding.ActivitySingleRestaurantDetailsBinding
@@ -21,6 +27,9 @@ class SingleRestaurantDetails: AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
     private var placeId: String = ""
     private var restaurantName: String = ""
+    private var price: String = ""
+    private var distance: String = ""
+    private var cuisine: String = ""
 
 
 
@@ -48,6 +57,10 @@ class SingleRestaurantDetails: AppCompatActivity() {
         placeId = intent.getStringExtra(MainActivity.placeIdKey)!!
         restaurantName = intent.getStringExtra(MainActivity.restaurantNameKey)!!
 
+        // To track preferences between Activities
+        distance = intent.getStringExtra("distance")!!
+        price = intent.getStringExtra("price")!!
+        cuisine = intent.getStringExtra("cuisine")!!
 
         var adapter = initAdapter(singleRestaurantDetailsBinding)
         initRecyclerViewDividers(singleRestaurantDetailsBinding.reviewRV)
@@ -111,6 +124,15 @@ class SingleRestaurantDetails: AppCompatActivity() {
         }
 
         viewModel.netSingleRestaurant(placeId)
+    }
+
+    override fun onBackPressed() {
+        val intent = Intent()
+        intent.putExtra("price", price)
+        intent.putExtra("distance", distance)
+        intent.putExtra("cuisine", cuisine)
+        setResult(RESULT_OK, intent)
+        finish()
     }
 
 }

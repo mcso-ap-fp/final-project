@@ -21,6 +21,11 @@ class MainViewModel : ViewModel() {
 
     private val apiKey = "AIzaSyDpDP44Eof2LUs__NZ32Xm_uhwrsFICGZM"
 
+    var cuisine: String? = null
+    var price = ""
+    var distance = ""
+
+
     private fun sortRestaurants(field: String): List<RestaurantData> {
         val restaurants: List<RestaurantData>? = currentRestaurants.value
 
@@ -51,6 +56,11 @@ class MainViewModel : ViewModel() {
             val restaurants = placesRepository.getRestaurants(cuisineSearch, apiKey, radius, maxPrice)
             currentRestaurants.postValue(restaurants)
         }
+    }
+
+    fun refreshRestaurants() {
+        val temp = currentRestaurants.value
+        currentRestaurants.value = temp
     }
 
     fun observeRestaurants(): LiveData<List<RestaurantData>> {

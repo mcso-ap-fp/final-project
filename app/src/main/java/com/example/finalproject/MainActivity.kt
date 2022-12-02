@@ -16,8 +16,6 @@ import com.example.finalproject.ui.RestaurantDetails
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.google.firebase.auth.FirebaseAuth
-import com.google.android.libraries.places.api.Places
-import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.*
 
 
@@ -101,9 +99,9 @@ class MainActivity : AppCompatActivity() {
 
     fun launchRestaurantDetailActivity (radius: String, maxPrice: String, cuisine: String?) {
         val restaurantDetailIntent = Intent(this, RestaurantDetails::class.java)
-        restaurantDetailIntent.putExtra(RestaurantDetails.radius, radius)
-        restaurantDetailIntent.putExtra(RestaurantDetails.maxPrice, maxPrice)
-        restaurantDetailIntent.putExtra(RestaurantDetails.cuisine, cuisine)
+        restaurantDetailIntent.putExtra(RestaurantDetails.radiusKey, radius)
+        restaurantDetailIntent.putExtra(RestaurantDetails.maxPriceKey, maxPrice)
+        restaurantDetailIntent.putExtra(RestaurantDetails.cuisineKey, cuisine)
         startActivity(restaurantDetailIntent)
     }
 

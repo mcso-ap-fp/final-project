@@ -17,12 +17,14 @@ import com.example.finalproject.model.PreferenceTypes
 import com.example.finalproject.model.UserPreferences
 import com.google.android.material.slider.LabelFormatter
 import com.google.firebase.auth.FirebaseAuth
+import kotlin.math.max
 
 class PreferencesFragment: Fragment() {
     private val cuisineRepository = CuisineRepository()
     private var _binding: FragmentPreferencesBinding? = null
     private val binding get() = _binding!!
     private val preferencesViewModel: PreferencesViewModel by activityViewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
     private val cuisineList = cuisineRepository.fetchData()
     private var preferencesList: List<UserPreferences> = emptyList()
 
@@ -151,6 +153,10 @@ class PreferencesFragment: Fragment() {
         val maxDistance = milesToMeters(binding.distanceSlider.value.toDouble()).toString()
         var cuisine: String? = binding.cuisineOptions.selectedItem.toString()
         val maxPrice = binding.priceSlider.value.toInt().toString()
+
+        mainViewModel.price = maxPrice
+        mainViewModel.distance = maxDistance
+        mainViewModel.cuisine = cuisine
 
         if (cuisine == "No Preference")
             cuisine = null
