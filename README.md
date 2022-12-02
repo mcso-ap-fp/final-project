@@ -91,6 +91,73 @@ Report the total Java and total XML lines that you wrote. Do not include boilerp
 Indicate how you calculate how many lines you authored if you report line totals. Maybe use a table.
 You can break down the lines into modules if you think that helps, but I'm most interested in the totals of code you wrote.
 
+
+--------------------------------------------
+File                                                                                     blank        comment           code
+----------------------------------------------------------------------------------------------------------------------------
+app/src/main/res/drawable/ic_launcher_background.xml                                         0              0            170
+app/src/main/java/com/example/finalproject/ui/PreferencesFragment.kt                        20              1            149
+app/src/main/res/layout/activity_single_restaurant_details.xml                              32              0            143
+app/src/main/java/com/example/finalproject/ui/Directions.kt                                 28              7            142
+app/src/main/java/com/example/finalproject/ui/SingleRestaurantDetails.kt                    29              3            118
+app/src/main/res/layout/fragment_preferences.xml                                            11              0            101
+app/src/main/res/layout/restaurant_details.xml                                              12              2             86
+app/src/main/java/com/example/finalproject/MainActivity.kt                                  22              2             86
+app/src/main/java/com/example/finalproject/api/PlacesApi.kt                                 11              5             72
+app/src/main/java/com/example/finalproject/ui/RestaurantDetails.kt                          14              0             70
+app/src/main/java/com/example/finalproject/ui/MainViewModel.kt                              21              3             67
+app/src/main/java/com/example/finalproject/ui/HomeFragment.kt                               10              1             61
+app/src/main/java/com/example/finalproject/ui/RestaurantDetailsAdapter.kt                   15              4             55
+app/src/main/res/layout/fragment_home.xml                                                    5              0             52
+app/src/main/res/layout/restaurant_reviews.xml                                               8              0             52
+app/src/main/AndroidManifest.xml                                                             3              0             46
+app/src/main/java/com/example/finalproject/ui/ReviewsAdapter.kt                             15              1             43
+app/src/main/java/com/example/finalproject/api/RestaurantDetailsData.kt                      5              0             42
+app/src/main/java/com/example/finalproject/ViewModelDBHelper.kt                              4              0             41
+app/src/main/java/com/example/finalproject/api/DirectionsData.kt                             6              1             32
+app/src/main/res/layout/cuisine_row.xml                                                      4              0             30
+app/src/main/res/drawable-v24/ic_launcher_foreground.xml                                     0              0             30
+app/src/main/res/layout/activity_restaurant_details.xml                                      4              0             28
+app/src/main/res/layout/direcions_map.xml                                                    2              0             24
+app/src/main/java/com/example/finalproject/AuthInit.kt                                       4              2             20
+app/src/main/res/layout/content_main.xml                                                     2              0             20
+app/src/main/java/com/example/finalproject/api/PlacesRepository.kt                           9              0             19
+app/src/main/java/com/example/finalproject/PreferencesViewModel.kt                           7              0             17
+app/src/main/java/com/example/finalproject/api/RestaurantData.kt                             2              1             16
+app/src/main/java/com/example/finalproject/model/UserPreferences.kt                          3              0             16
+app/src/main/res/values/strings.xml                                                          0              0             15
+app/src/main/res/layout/activity_main.xml                                                    2              0             11
+app/src/main/res/values-night/themes.xml                                                     0              5             11
+app/src/main/res/values/themes.xml                                                           0              5             11
+app/src/main/res/drawable/ic_favorite_black_24dp.xml                                         0              0             10
+app/src/main/res/values/colors.xml                                                           0              0             10
+app/src/main/java/com/example/finalproject/model/CuisineRepository.kt                        2              1              7
+app/src/main/res/menu/menu_main.xml                                                          0              0              7
+app/src/main/res/layout/fragment_create_group.xml                                            1              0              7
+app/src/main/res/values/google_maps_api.xml                                                  0              2              6
+app/src/main/res/values/google_places_api.xml                                                0              2              6
+app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml                                     0              0              5
+app/src/main/res/xml/data_extraction_rules.xml                                               0             15              4
+app/src/main/res/xml/backup_rules.xml                                                        0             11              2
+----------------------------------------------------------------------------------------------------------------------------
+SUM:                                                                                       313             74           1960
+----------------------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+Language                     files          blank        comment           code
+-------------------------------------------------------------------------------
+Kotlin                          19            227             32           1073
+XML                             25             86             42            887
+-------------------------------------------------------------------------------
+SUM:                            44            313             74           1960
+-------------------------------------------------------------------------------
+
+Code in files written by us = 1513
+Lines of code taken from class lectures/demos = 78
+
+Total code written by us = 1435
+
+
 ## Code Frequency Graph (if available)
 We want you to include the code frequency graph that github gives you for your repository. 
 Open your project's github page in a web browser. Click the "Insights" tab. 
